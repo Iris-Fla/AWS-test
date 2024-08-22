@@ -1,0 +1,84 @@
+.ava {
+  border-radius: 50%;
+}
+
+.rainbow {
+  background: linear-gradient(to right, #e60000, #f39800, #fff100, #009944, #0068b7, #1d2088, #920783);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 300%;
+  font-weight: bold;
+  display: inline-block;
+}
+
+@keyframes bound-anim {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(24px);
+  }
+}
+
+/*** 全文字にアニメーションを適用 ***/
+.bound span {
+  display: inline-block;
+  /*横並びにしつつアニメーションを適用*/
+  animation: .5s bound-anim ease-in infinite alternate;
+}
+
+/*** 各文字のスタート時間をずらす ***/
+/* 1文字目 */
+.bound span:nth-child(1) {
+  animation-delay: 0;
+
+  .example4 {
+    background: linear-gradient(to right, #e60000, #f39800, #fff100, #009944, #0068b7, #1d2088, #920783, #e60000) 0 / 200%;
+    height: 80px;
+    animation: 5s example4 linear infinite;
+  }
+
+  @keyframes example4 {
+    100% {
+      background-position: 200%;
+    }
+  }
+}
+
+/* 2文字目 */
+.bound span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+/* 3文字目 */
+.bound span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* 4文字目 */
+.bound span:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+.bound span:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+/*** 装飾用 ***/
+p {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.ultimate {
+  background: linear-gradient(to right, #e60000, #f39800, #fff100, #009944, #0068b7, #1d2088, #920783, #e60000) 0 / 200%;
+  height: 120vh;
+  animation: 4s example4 linear infinite;
+}
+
+@keyframes example4 {
+  100% {
+    background-position: 200%;
+  }
+}
