@@ -15,7 +15,7 @@ if (isset($_POST['body'])) {
   // 処理が終わったらリダイレクトする
   // リダイレクトしないと，リロード時にまた同じ内容でPOSTすることになる
   header("HTTP/1.1 302 Found");
-  header("Location: ./formtodbtest.php");
+  header("Location: ./daakuweb.php");
   return;
 }
 
@@ -47,16 +47,16 @@ $select_sth->execute();
 ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
-<div class="container">
+<body style="background-color: #000;">
+<img style="width:100%;" src="/images/darkwebtop.webp">
+<div class="container" style="">
 <!-- フォームのPOST先はこのファイル自身にする -->
-<form method="POST" action="./formtodbtest.php" class="input-group m-4">
+<form method="POST" action="./daakuweb.php" class="input-group mt-3">
   <textarea name="body" style="max-witdh: 500px;" class="form-control" placeholder="投稿内容を入力してください"></textarea>
   <button class="btn btn-primary" type="submit">送信</button>
 </form>
 
-<hr style="margin: 3em 0;"></hr>
-
-<div style="width: 100%; text-align: center; padding-bottom: 1em; border-bottom: 1px solid #ccc; margin-bottom: 0.5em">
+<div style="width: 100%; text-align: center; padding-bottom: 1em; border-bottom: 1px solid #eee; margin-bottom: 0.5em; color:#fff;">
   <?= $page ?>ページ目
   (全 <?= floor($count_all / $count_per_page) + 1 ?>ページ中)
 
@@ -75,9 +75,10 @@ $select_sth->execute();
 </div>
 
 <?php foreach($select_sth as $row): ?>
-  <dl style="margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #ccc;">
+  <dl style="color:#fff; margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #eee;">
     <dt><?= nl2br(htmlspecialchars($row['id'])) ?> 名前:<font color="#34A52B"><b>ネットを彷徨う者</b></font> : <?= nl2br(htmlspecialchars($row['created_at'])) ?></dt>
     <dd><?= nl2br(htmlspecialchars($row['content'])) ?></dd>
   </dl>
 <?php endforeach ?>
 </div>
+</body>
