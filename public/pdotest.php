@@ -1,8 +1,8 @@
 <?php
 $dbh = new PDO('mysql:host=mysql;dbname=kyototech', 'root', '');
 
-$insert_sth = $dbh->prepare("INSERT INTO hogehoge (text) VALUES (:text)");
+$insert_sth = $dbh->prepare("INSERT INTO posts (content) VALUES (:content)");
 $insert_sth->execute([
-    ':text' => 'hello world!!!!!!!!!'
+    ':content' => 'hello world!!!!!!!!!'
 ]);
 print('insertできました');

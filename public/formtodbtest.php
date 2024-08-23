@@ -4,8 +4,10 @@ $dbh = new PDO('mysql:host=mysql;dbname=kyototech', 'root', '');
 if (isset($_POST['body'])) {
   // POSTで送られてくるフォームパラメータ body がある場合
 
-  // hogehogeテーブルにINSERTする
-  $insert_sth = $dbh->prepare("INSERT INTO hogehoge (text) VALUES (:body)");
+  // postsテーブルにINSERTする
+
+  //SQLインジェクション対策してるはず。
+  $insert_sth = $dbh->prepare("INSERT INTO posts (content) VALUES (:body)");
   $insert_sth->execute([
       ':body' => $_POST['body'],
   ]);
@@ -26,8 +28,8 @@ $count_per_page = 10;
 // ページ数に応じてスキップする行数を計算
 $skip_count = $count_per_page * ($page - 1);
 
-// hogehogeテーブルの行数を SELECT COUNT で取得
-$count_sth = $dbh->prepare('SELECT COUNT(*) FROM hogehoge;');
+// postsテーブルの行数を SELECT COUNT で取得
+$count_sth = $dbh->prepare('SELECT COUNT(*) FROM posts;');
 $count_sth->execute();
 $count_all = $count_sth->fetchColumn();
 if ($skip_count >= $count_all) {
@@ -36,18 +38,20 @@ if ($skip_count >= $count_all) {
     return;
 }
 
-// hogehogeテーブルからデータを取得
-$select_sth = $dbh->prepare('SELECT * FROM hogehoge ORDER BY created_at DESC LIMIT :count_per_page OFFSET :skip_count');
+// postsテーブルからデータを取得
+$select_sth = $dbh->prepare('SELECT * FROM posts ORDER BY created_at DESC LIMIT :count_per_page OFFSET :skip_count');
 // 文字列ではなく数値をプレースホルダにバインドする場合は bindParam() を使い，第三引数にINTであることを伝えるための定数を渡す
 $select_sth->bindParam(':count_per_page', $count_per_page, PDO::PARAM_INT);
 $select_sth->bindParam(':skip_count', $skip_count, PDO::PARAM_INT);
 $select_sth->execute();
 ?>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
+<div class="container">
 <!-- フォームのPOST先はこのファイル自身にする -->
-<form method="POST" action="./formtodbtest.php">
-  <textarea name="body"></textarea>
-  <button type="submit">送信</button>
+<form method="POST" action="./formtodbtest.php" class="input-group m-4">
+  <textarea name="body" style="max-witdh: 500px;" class="form-control" placeholder="投稿内容を入力してください"></textarea>
+  <button class="btn btn-primary" type="submit">送信</button>
 </form>
 
 <hr style="margin: 3em 0;"></hr>
@@ -72,9 +76,8 @@ $select_sth->execute();
 
 <?php foreach($select_sth as $row): ?>
   <dl style="margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #ccc;">
-    <dt>送信日時</dt>
-    <dd><?= $row['created_at'] ?></dd>
-    <dt>送信内容</dt>
-    <dd><?= nl2br(htmlspecialchars($row['text'])) ?></dd>
+    <dt><?= nl2br(htmlspecialchars($row['id'])) ?> 名前:<font color="#34A52B"><b>ネットを彷徨う者</b></font> : <?= nl2br(htmlspecialchars($row['created_at'])) ?></dt>
+    <dd><?= nl2br(htmlspecialchars($row['content'])) ?></dd>
   </dl>
 <?php endforeach ?>
+</div>
