@@ -32,9 +32,9 @@ $skip_count = $count_per_page * ($page - 1);
 $count_sth = $dbh->prepare('SELECT COUNT(*) FROM posts;');
 $count_sth->execute();
 $count_all = $count_sth->fetchColumn();
-if ($skip_count >= $count_all) {
+if ($skip_count > $count_all) {
     // スキップする行数が全行数より多かったらおかしいのでエラーメッセージ表示し終了
-    print('このページは存在しません!');
+    header("Location: ./error.php");
     return;
 }
 
