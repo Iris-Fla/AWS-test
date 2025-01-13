@@ -43,14 +43,11 @@ $user = $insert_sth->fetch();
   <dd><?= htmlspecialchars($user['email']) ?></dd>
   <dt>名前</dt>
   <dd><?= htmlspecialchars($user['name']) ?></dd>
+  <?php if(!empty($_GET['namechange'])): ?>
+  <h1 style="color: red;">
+  👆👆👆👆見て！名前変わったよ！👆👆👆👆
+  </h1>
+  <?php endif; ?>
 </dl>
 
-<h4>お名前...変えちゃう?</h4>
-<form method="POST">
-    <label>
-        新しい名前:
-        <input type="text" name="name">
-    </label>
-    <br>
-    <button type="submit">決定</button>
-</form>
+<a href="./name_change.php">お名前...変えちゃう?</a>
