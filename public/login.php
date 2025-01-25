@@ -33,24 +33,28 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
   return;
 }
 ?>
-<h1>ログイン</h1>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<div class="container">
+<h1 class="text-center">ログイン</h1>
 <!-- ログインフォーム -->
 <form method="POST">
   <!-- input要素のtype属性は全部textでも動くが、適切なものに設定すると利用者は使いやすい -->
-  <label>
+  <label class="form-label">
     メールアドレス:
-    <input type="email" name="email">
+    <input type="email" name="email" class="form-control">
   </label>
   <br>
-  <label>
+  <label class="form-label">
     パスワード:
-    <input type="password" name="password" minlength="6">
+    <input type="password" name="password" minlength="6" class="form-control">
   </label>
   <br>
-  <button type="submit">決定</button>
+  <button type="submit" class="btn btn-info">ログイン</button>
 </form>
+<a href="/signup.php">登録はこちら</a>
 <?php if(!empty($_GET['error'])): // エラー用のクエリパラメータがある場合はエラーメッセージ表示 ?>
 <div style="color: red;">
   メールアドレスかパスワードが間違っています。
+</div>
 </div>
 <?php endif; ?>

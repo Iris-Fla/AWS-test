@@ -28,6 +28,8 @@ $insert_sth->execute([
 ]);
 $user = $insert_sth->fetch();
 ?>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<div class="container">
 <h1>ログイン完了</h1>
 <p>
   ログイン完了しました!
@@ -36,6 +38,7 @@ $user = $insert_sth->fetch();
 <p>
   また、あなたが現在ログインしている会員情報は以下のとおりです。
 </p>
+<a href="/bbs.php">掲示板に戻る</a>
 <dl> <!-- 登録情報を出力する際はXSS防止のため htmlspecialchars() を必ず使いましょう -->
   <dt>ID</dt>
   <dd><?= htmlspecialchars($user['id']) ?></dd>
@@ -51,3 +54,6 @@ $user = $insert_sth->fetch();
 </dl>
 
 <a href="./name_change.php">お名前...変えちゃう?</a>
+<br>
+<a href="./icon_change.php">アイコン変更はこちら</a>
+</div>

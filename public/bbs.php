@@ -41,7 +41,10 @@ if (isset($_POST['body']) && !empty($_SESSION['login_user_id'])) {
 <?php if(empty($_SESSION['login_user_id'])): ?>
   投稿するには<a href="/login.php">ログイン</a>が必要です。
 <?php else: ?>
-</div><a href="/icon_change.php">アイコン画像の設定はこちら</a>。</div>
+<div><a href="/icon_change.php">アイコン画像の設定はこちら</a>。</div>
+<br>
+<div><a href="/name_change.php">名前の変更はこちら</a>。</div>
+
 <form method="POST" action="./bbs.php" enctype="multipart/form-data">
   <textarea name="body"></textarea>
   <div style="margin: 1em 0;">
@@ -50,9 +53,8 @@ if (isset($_POST['body']) && !empty($_SESSION['login_user_id'])) {
   <button type="submit">送信</button>
 </form>
 <?php endif; ?>
-
-<hr>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<div class="container">
 <dl id="entryTemplate" style="display: none; margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #ccc;">
   <dt>番号</dt>
   <dd data-role="entryIdArea"></dd>
@@ -71,6 +73,7 @@ if (isset($_POST['body']) && !empty($_SESSION['login_user_id'])) {
   </dd>
 </dl>
 <div id="entriesRenderArea"></div>
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {

@@ -40,12 +40,12 @@ $insert_sth->execute([
 ]);
 $user = $insert_sth->fetch();
 ?>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<div class="container">
+<h1>アイコン変更ページ</h1>
+<a href="./bbs.php">掲示板に戻る</a>
+<h3>ログイン中のアカウント:<strong><?= htmlspecialchars($user['name']) ?></strong></h3>
 
-<div>いまの名前</div>
-<h3><?= htmlspecialchars($user['name']) ?></h3>
-
-
-<h2>アイコン変えるならこち</h2>
 <?php if(isset($user['icon_filename'])):?>
 <div>
     おまえ、これ?
@@ -53,7 +53,10 @@ $user = $insert_sth->fetch();
 </div>
 <?php endif;?>
 
-<form method="POST" enctype="multipart/form-data">
-    <input type="file" accept="image/*" name="image">
-    <button type="submit">送信</button>
+<div class="input-group">
+<form method="POST" enctype="multipart/form-data" class="form-label">
+    <input type="file" accept="image/*" name="image" class="form-control">
+    <button type="submit" class="btn btn-info">送信</button>
 </form>
+</div>
+</div>
